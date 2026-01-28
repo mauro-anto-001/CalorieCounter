@@ -1,19 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { type MacroTargets, type FoodEntry } from "../types/models";
+import { useState, useEffect } from "react";
+import type { MacroTargets, FoodEntry } from "../types/models";
 function Home() {
-  const [entries, setEntries] = useState<FoodEntry[]>([
-    {
-      id: "1",
-      name: "Pizza",
-      meal: "breakfast",
-      calories: 350,
-      protein: 7,
-      carbs: 70,
-      fat: 27,
-      createdAt: new Date().toISOString(),
-    },
-  ]);
+  const [entries, setEntries] = useState<FoodEntry[]>([]);
 
   const [target, setTarget] = useState<MacroTargets>({
     calories: 2250,
@@ -21,6 +10,23 @@ function Home() {
     carbs: 200,
     fat: 50,
   });
+  useEffect(() => {
+    const now = new Date();
+    const key = `entries-${now.getFullYear()}-${
+      now.getMonth() + 1
+    }-${now.getDate()}`;
+
+    const existing = localStorage.getItem(key);
+    const parsed: FoodEntry[] = existing ? JSON.parse(existing) : [];
+
+    setEntries(parsed);
+  }, []);
+  useEffect(() => {
+    const stored = localStorage.getItem("targets");
+    if (stored) {
+      setTarget(JSON.parse(stored));
+    }
+  }, []);
 
   const totals = entries.reduce(
     (acc, e) => ({
@@ -37,25 +43,25 @@ function Home() {
       <h1>Todays Food Log</h1>
       <h2>Summary</h2>
       <p>
-        Calories: {totals.calories} / {target.calories}
+        Calories: {Math.round(totals.calories)} / {target.calories}
       </p>
       <p>
-        Protein: {totals.protein} / {target.protein}
+        Protein: {Math.round(totals.protein)} / {target.protein}
       </p>
       <p>
-        Carbs: {totals.carbs} / {target.carbs}
+        Carbs: {Math.round(totals.carbs)} / {target.carbs}
       </p>
       <p>
-        Fat: {totals.fat} / {target.fat}
+        Fat: {Math.round(totals.fat)} / {target.fat}
       </p>
       {entries.map((entry) => (
         <div key={entry.id}>
           <p>Name: {entry.name}</p>
           <p>Meal: {entry.meal}</p>
           <p>Calories: {entry.calories}</p>
-          <p>Protein: {entry.protein}</p>
-          <p>Carbs: {entry.carbs}</p>
-          <p>Fat: {entry.fat}</p>
+          <p>Protein: {Math.round(entry.protein)}</p>
+          <p>Carbs: {Math.round(entry.carbs)}</p>
+          <p>Fat: {Math.round(entry.fat)}</p>
           <p>When: {entry.createdAt}</p>
         </div>
       ))}
@@ -66,6 +72,9 @@ function Home() {
         </li>
         <li>
           <Link to="/login">Log Out</Link>
+        </li>
+        <li>
+          <Link to="/scan"> Scan food</Link>
         </li>
       </ul>
     </>

@@ -19,3 +19,13 @@ export type MacroTargets = {
   carbs: number;
   fat: number;
 };
+export type FoodItem = {
+  id: string; //use barcode as id for now
+  servings: number;
+  barcode?: string;
+  name: string;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+};

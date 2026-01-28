@@ -3,7 +3,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import LogFood from "./pages/LogFood";
 import Register from "./pages/Register";
-
+import Scan from "./pages/Scan";
+import ConfirmFood from "./pages/ConfirmFood";
+import Targets from "./pages/Targets";
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +15,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logfood" element={<LogFood />} />
+        <Route path="/scan" element={<Scan />} />
+        <Route path="/confirm" element={<ConfirmFood />} />
+        <Route path="/targets" element={<Targets />} />
       </Routes>
     </BrowserRouter>
   );
