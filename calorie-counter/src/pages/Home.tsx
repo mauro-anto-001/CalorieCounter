@@ -76,6 +76,12 @@ function Home() {
         <li>
           <Link to="/scan"> Scan food</Link>
         </li>
+        <li>
+          <Link to="/targets">Edit Targets</Link>
+        </li>
+        <li>
+          <Link to="/manual">Manual Entry</Link>
+        </li>
       </ul>
     </>
   );

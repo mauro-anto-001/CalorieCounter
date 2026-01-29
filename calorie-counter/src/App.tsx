@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Scan from "./pages/Scan";
 import ConfirmFood from "./pages/ConfirmFood";
 import Targets from "./pages/Targets";
+import ManualFood from "./pages/ManualFood";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/scan" element={<Scan />} />
         <Route path="/confirm" element={<ConfirmFood />} />
         <Route path="/targets" element={<Targets />} />
+        <Route path="/manual" element={<ManualFood />} />
       </Routes>
     </BrowserRouter>
   );

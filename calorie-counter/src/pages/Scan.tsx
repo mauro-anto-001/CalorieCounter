@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useZxing } from "react-zxing";
 import type { FoodItem } from "../types/models";
+import { Link } from "react-router-dom";
 function Scan() {
   const [barcode, setBarcode] = useState<string | null>(null);
   const [locked, setLocked] = useState(false);
@@ -33,7 +34,9 @@ function Scan() {
       const data: any = await res.json();
 
       if (!data || data.status !== 1) {
-        setError("Not found in Open Food Facts.");
+        setError("Not found in Open Food Facts. Enter manually");
+        <Link to="/manual">Enter food manually</Link>;
+
         return;
       }
 

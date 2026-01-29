@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { MacroTargets } from "../types/models";
 
 const DEFAULT_TARGETS: MacroTargets = {
-  calories: 2250,
+  calories: 9999,
   protein: 220,
   carbs: 200,
   fat: 50,
